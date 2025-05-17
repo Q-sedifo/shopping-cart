@@ -19,11 +19,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
-          <Providers>
-            <Header/>
-            {children}
-          </Providers>
+      <body className="relative">
+        <Providers>
+          <Header/>
+          {children}
+        </Providers>
       </body>
     </html>
   );
