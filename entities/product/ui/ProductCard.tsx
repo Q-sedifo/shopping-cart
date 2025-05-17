@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-// Actions
+// Reducers
 import { addItem, removeItem} from "@/shared/store";
 
 // Utils
@@ -16,31 +16,27 @@ import { BsCart3 } from "react-icons/bs";
 import { BsCartCheck } from "react-icons/bs";
 
 // Types
-import { RootState } from "@/shared/store";
 import type { IProduct } from "../model/type";
+import { RootState } from "@/shared/store";
 
 interface IProductCardProps {
   product: IProduct;
 }
 
 export const ProductCard: React.FC<IProductCardProps> = ({ product }) => {
-  const [isInCart, setIsInCart] = useState<boolean>(false)
-  const { items } = useSelector(
-    (state: RootState) => state.cart
-  )
+  const { items } = useSelector((state: RootState) => state.cart)
   const dispatch = useDispatch()
 
-  const icon = isInCart ? <BsCartCheck className="w-[20px] h-[20px] fill-black"/> : <BsCart3 className="w-[20px] h-[20px] fill-black"/>
+  const isProductInCart = items.find((item) => item.id === product.id)
+  const icon = isProductInCart ? <BsCartCheck className="w-[20px] h-[20px] fill-black"/> : <BsCart3 className="w-[20px] h-[20px] fill-black"/>
 
   const addToCartToggle = () => {
-    if (isInCart) {
+    if (isProductInCart) {
       dispatch(removeItem(product.id))
-      setIsInCart(false)
       return 
     }
 
     dispatch(addItem(product))
-    setIsInCart(true)
   }
 
   return (
@@ -59,7 +55,7 @@ export const ProductCard: React.FC<IProductCardProps> = ({ product }) => {
         <span className="font-semibold">{product.price}$</span>
         <BaseButton 
           className={cn("!py-[10px] bg-transparent border border-emerald-600 duration-500 hover:bg-emerald-500", {
-            "!bg-emerald-500": isInCart
+            "!bg-emerald-500": isProductInCart
           })}
           onClick={addToCartToggle}
           icon={icon}

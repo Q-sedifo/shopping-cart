@@ -1,5 +1,4 @@
-"use client"
-import React, { useEffect } from "react";
+import React from "react";
 
 // Types
 import type { IProduct } from "@/entities/product/model/type";

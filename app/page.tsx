@@ -29,7 +29,7 @@ export default function Home() {
     if (!searchValue) return products
 
     const value = searchValue.toLowerCase().trim()
-    const filteredProducts = products.filter((product) => product.title.toLowerCase().includes(value) )
+    const filteredProducts = products.filter((product) => product.title.toLowerCase().includes(value))
 
     return filteredProducts
   }, [products, searchValue])
