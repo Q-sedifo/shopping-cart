@@ -22,6 +22,17 @@ export const cartSlice = createSlice({
 
       foundedProduct.amount += 1
     },
+    deductItem: (state, { payload }) => {
+      const foundedProduct = state.items.find((product) => product.id === payload)
+      if (!foundedProduct) return
+
+      if (foundedProduct?.amount === 1) {
+        state.items = state.items.filter((product) => product.id !== payload)
+        return
+      }
+
+      foundedProduct.amount -= 1
+    },
     removeItem: (state, { payload }) => {
       const filteredCart = state.items.filter((product) => product.id !== payload)
       state.items = filteredCart
@@ -29,5 +40,5 @@ export const cartSlice = createSlice({
   },
 })
 
-export const { addItem, removeItem } = cartSlice.actions;
+export const { addItem, deductItem, removeItem } = cartSlice.actions;
 export default cartSlice.reducer;
