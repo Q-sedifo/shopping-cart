@@ -50,6 +50,7 @@ export const CartModal: React.FC<ICartModalProps> = ({ isOpen, onClose }) => {
               <BaseButton
                 text="Delete all"
                 onClick={handleClearCart}
+                className="!bg-black"
               />
             )}
           </div>
