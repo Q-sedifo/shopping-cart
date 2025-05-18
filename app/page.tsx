@@ -2,8 +2,8 @@
 import React, { useEffect, useMemo } from "react";
 
 // Components
-import Container from "@/shared/ui/Container"
-import { Products } from "@/widgets/Products"
+import Container from "@/shared/ui/Container";
+import { Products } from "@/widgets/Products";
 
 import { useDispatch, useSelector } from "react-redux";
 

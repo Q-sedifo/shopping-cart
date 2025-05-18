@@ -1,5 +1,9 @@
 "use client"
+
 import React from "react";
+
+// React query
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 // Redux
 import { Provider } from "react-redux";
@@ -10,9 +14,13 @@ interface IProvidersProps {
 }
 
 export const Providers: React.FC<IProvidersProps> = ({ children }) => {
+  const queryClient = new QueryClient()
+
   return (
     <Provider store={store}>
-      { children }
+      <QueryClientProvider client={queryClient}>
+        { children }
+      </QueryClientProvider>
     </Provider>
   )
 }
