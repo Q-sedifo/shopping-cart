@@ -10,6 +10,7 @@ import { ICartProduct } from "@/entities/cart/model/type";
 
 // Components
 import { BaseButton } from "@/shared/ui/Buttons/BaseButton";
+import Image from "next/image";
 
 // Icons
 import { IoAddOutline } from "react-icons/io5";
@@ -37,7 +38,15 @@ export const ProductCartItem: React.FC<IProductCartItemProps> = ({ product }) =>
 
   return (
     <div className="w-full flex flex-row items-center justify-between gap-2">
-      {product.title}
+      <div className="flex flex-row items-center gap-2">
+        <Image 
+          src={product?.images[0]} 
+          alt={product.title} 
+          width={50} 
+          height={50}
+        />
+        <span className="text-xs">{product.title}</span>
+      </div>
       <div className="flex flex-row items-center gap-2">
         <BaseButton
           onClick={hadnleDeductItem}
@@ -51,6 +60,7 @@ export const ProductCartItem: React.FC<IProductCartItemProps> = ({ product }) =>
         <BaseButton
           onClick={handleRemoveProduct}
           icon={<IoTrashSharp/>}
+          className="!bg-red-900"
         />
       </div>
     </div>

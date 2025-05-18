@@ -1,10 +1,10 @@
 import React from "react";
 import cn from "classnames";
 
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 // Types
-import { RootState } from "@/shared/store";
+import { RootState, clearCart } from "@/shared/store";
 import { ICartProduct } from "@/entities/cart/model/type";
 
 // Components
@@ -25,9 +25,15 @@ interface ICartModalProps {
 
 export const CartModal: React.FC<ICartModalProps> = ({ isOpen, onClose }) => {
   const { items } = useSelector((state: RootState) => state.cart)
+  const dispatch = useDispatch()
 
   // Get total products price
   const totalPrice = items.map((product: ICartProduct) => product.price * product.amount).reduce((acc, num) => acc + num, 0).toFixed(2)
+
+  // Remove all products from cart
+  const handleClearCart = () => {
+    dispatch(clearCart())
+  }
 
   return (
     <Modal isOpen={isOpen}>
@@ -43,12 +49,12 @@ export const CartModal: React.FC<ICartModalProps> = ({ isOpen, onClose }) => {
             {items.length > 0 && (
               <BaseButton
                 text="Delete all"
-                onClick={() => {}}
+                onClick={handleClearCart}
               />
             )}
           </div>
           <div className="w-full flex flex-col gap-2 !pt-2">
-            {items.map((product: ICartProduct, i: number) => (
+            {items.map((product: ICartProduct) => (
               <ProductCartItem key={randomId()} product={product}/>
             ))}
           </div>

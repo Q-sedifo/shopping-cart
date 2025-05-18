@@ -2,7 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 
 // Slices
 import productReducer from "@/entities/product/model/productSlice";
-import cartReducer, { addItem, deductItem, removeItem } from "@/entities/cart/model/cartSlice";
+import cartReducer, { addItem, deductItem, removeItem, clearCart } from "@/entities/cart/model/cartSlice";
 import inputSearchReducer, { search } from "@/features/inputSearch/model/inputSearchSlice";
 
 const store = configureStore({
@@ -18,6 +18,7 @@ export {
   addItem, 
   deductItem,
   removeItem,
+  clearCart,
   search
 }
 
