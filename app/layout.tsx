@@ -24,7 +24,7 @@ export default function RootLayout({
       <body className="relative">
         <Providers>
           <Header/>
-          <Suspense fallback={<div>Завантаження...</div>}>
+          <Suspense fallback={<div>Downloading...</div>}>
             <main className="!py-5">
               {children}
             </main>
