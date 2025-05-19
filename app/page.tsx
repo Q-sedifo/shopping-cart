@@ -1,5 +1,6 @@
 "use client"
 import React, { useEffect, useMemo } from "react";
+import { useSearchParams } from "next/navigation";
 
 // Components
 import Container from "@/shared/ui/Container";
@@ -13,8 +14,11 @@ import { RootState, AppDispatch } from "@/shared/store";
 // Reducers
 import { fetchProducts } from "@/entities/product/model/productThunks";
 
-export default function Home() {
+const Home = () => {
   const dispatch = useDispatch<AppDispatch>()
+  const params = useSearchParams()
+  const page = params.get("page") ?? "1"
+  const productsLimit = 20
 
   const { searchValue } = useSelector((state: RootState) => state.inputSearch)
   const { products, isLoading } = useSelector(
@@ -22,8 +26,11 @@ export default function Home() {
   )
 
   useEffect(() => {
-    dispatch(fetchProducts())
-  }, [dispatch])
+    dispatch(fetchProducts({ 
+      limit: productsLimit, 
+      from: ((Number(page) -1) * productsLimit)
+    }))
+  }, [dispatch, page])
 
   const filteredProducts = useMemo(() => {
     if (!searchValue) return products
@@ -43,3 +50,5 @@ export default function Home() {
     </Container>
   )
 }
+
+export default Home;

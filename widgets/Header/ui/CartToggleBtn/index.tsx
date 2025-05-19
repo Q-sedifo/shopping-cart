@@ -29,7 +29,7 @@ export const CartToggleBtn = () => {
         icon={<RiShoppingCart2Line/>}
         onClick={handleToggleCartModal}
       />
-      <span className="flex items-center justify-center absolute right-[-12px] top-[-12px] w-[30px] h-[30px] !p-2 rounded-full !bg-black text-emerald-500">
+      <span className="flex items-center justify-center absolute right-[-12px] top-[-12px] w-[30px] h-[30px] !p-2 rounded-full !bg-black text-emerald-500 border-3 border-emerald-500">
         {cartItemsCount}
       </span>
       <CartModal onClose={handleToggleCartModal} isOpen={isCartModalOpen}/>

@@ -5,6 +5,17 @@ export interface IProduct {
   price: number;
   description: string;
   rating: number;
+  stock: number;
+  thumbnail: string;
+  reviews: IProductReview[];
+}
+
+export interface IProductReview {
+  comment: string;
+  rating: number;
+  reviewerEmail: string;
+  reviewerName: string;
+  date: Date | string;
 }
 
 export interface IProductState {

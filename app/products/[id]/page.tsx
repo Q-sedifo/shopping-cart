@@ -5,6 +5,11 @@ import { useQuery } from "@tanstack/react-query";
 
 // Components
 import Container from "@/shared/ui/Container";
+import Box from "@/shared/ui/Box";
+import { ProductImages } from "./(ui)/ProductImages";
+import { ProductInfo } from "./(ui)/ProductInfo";
+import { ProductCharacteristics } from "./(ui)/ProductCharacteristics";
+import { ProductReviews } from "./(ui)/ProductReviews";
 
 const fetchProduct = async (id: number) => {
   const res = await fetch(`https://dummyjson.com/products/${id}`)
@@ -18,6 +23,7 @@ interface IProductProps {
 const Product: React.FC<IProductProps> = ({ params }) => {
   const { id } = React.use(params)
 
+  // Getting product
   const { data, isLoading, isError } = useQuery({
     queryKey: ['product', id],
     queryFn: () => fetchProduct(Number(id)),
@@ -28,8 +34,24 @@ const Product: React.FC<IProductProps> = ({ params }) => {
 
   return (
     <Container>
-      {isLoading && <p>Loading...</p>}
-      {isError && <p>Error!</p>}
+      {isLoading || isError && (
+        <Box className="flex-2">
+          {isLoading && <p>Loading...</p>}
+          {isError && <p>Error!</p>}
+        </Box>
+      )}
+      {data && (
+        <div className="w-full flex flex-col gap-5 lg:flex-row">
+          <div className="w-full flex flex-2 flex-col gap-5">
+            <ProductImages images={data.images}/>
+            <ProductCharacteristics product={data}/>
+            <ProductReviews reviews={data.reviews}/>
+          </div>
+          <div className="flex-1">
+            <ProductInfo product={data}/>
+          </div>
+        </div>
+      )}
     </Container>
   )
 }
