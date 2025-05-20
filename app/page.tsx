@@ -8,12 +8,9 @@ import { fetchProducts } from "@/entities/product/api/productApi";
 
 // Components
 import Container from "@/shared/ui/Container";
-import { Products } from "@/widgets/Products";
-import { BaseButton } from "@/shared/ui/Buttons/BaseButton";
 import Box from "@/shared/ui/Box";
-
-// Icons
-import { FaArrowRightLong } from "react-icons/fa6";
+import { Products } from "@/widgets/Products";
+import { Pagination } from "@/shared/ui/Pagination";
 
 const Home = () => {
   const params = useSearchParams()
@@ -44,18 +41,11 @@ const Home = () => {
           isLoading={isLoading}
         />
       </Box>
-      {/* Pagination */}
-      <div className="w-full flex items-center gap-2">
-        <BaseButton
-          text="Previous"
-          onClick={handlePrevPage}
-        />
-        <BaseButton
-          text="Next"
-          onClick={handleNextPage}
-          icon={<FaArrowRightLong/>}
-        />
-      </div>
+      <Pagination
+        page={page}
+        onNextClick={handleNextPage}
+        onPrevClick={handlePrevPage}
+      />
     </Container>
   )
 }
