@@ -40,12 +40,12 @@ const Home = () => {
           products={data} 
           isLoading={isLoading}
         />
+        <Pagination
+          page={page}
+          onNextClick={handleNextPage}
+          onPrevClick={handlePrevPage}
+        />
       </Box>
-      <Pagination
-        page={page}
-        onNextClick={handleNextPage}
-        onPrevClick={handlePrevPage}
-      />
     </Container>
   )
 }
