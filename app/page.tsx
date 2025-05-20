@@ -35,16 +35,19 @@ const Home = () => {
 
   return (
     <Container>
-      <Box className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
-        <Products 
-          products={data} 
-          isLoading={isLoading}
-        />
-        <Pagination
-          page={page}
-          onNextClick={handleNextPage}
-          onPrevClick={handlePrevPage}
-        />
+      <Box>
+        <Box.Title>All products</Box.Title>
+        <Box.Content className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
+          <Products 
+            products={data} 
+            isLoading={isLoading}
+          />
+          <Pagination
+            page={page}
+            onNextClick={handleNextPage}
+            onPrevClick={handlePrevPage}
+          />
+        </Box.Content>
       </Box>
     </Container>
   )
