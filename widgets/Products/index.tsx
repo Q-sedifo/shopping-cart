@@ -5,23 +5,27 @@ import type { IProduct } from "@/entities/product/model/type";
 
 // Components
 import { ProductCard } from "@/entities/product/ui/ProductCard";
-import Box from "@/shared/ui/Box";
+import { ProductCardSkeleton } from "@/entities/product/ui/ProductCardSkeleton";
 
 // Utils
 import { randomId } from "@/shared/utils";
 
 interface IProductsProps {
-  filteredProducts: IProduct[];
+  products: IProduct[] | undefined;
   isLoading: boolean;
 }
 
-export const Products: React.FC<IProductsProps> = ({ filteredProducts, isLoading }) => {
+export const Products: React.FC<IProductsProps> = ({ products, isLoading }) => {
   return (
-    <Box className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
-      {isLoading && "Loading..."}
-      {filteredProducts.map((product: IProduct) => (
+    <>
+      {isLoading && (
+        Array.from({ length: 9 }, (_, i) => (
+          <ProductCardSkeleton key={i} />
+        )
+      ))}
+      {products?.map((product: IProduct) => (
         <ProductCard key={randomId()} product={product}/>
       ))}
-    </Box>
+    </>
   )
 }

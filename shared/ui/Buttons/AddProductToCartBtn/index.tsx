@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 // Reducers
 import { addItem, removeItem} from "@/shared/store";
-import { selectIsProductInCart } from "@/entities/product/model/selectors";
+import { selectIsProductInCart } from "@/entities/cart/model/selectors";
 
 // Components
 import { BaseButton } from "../BaseButton";

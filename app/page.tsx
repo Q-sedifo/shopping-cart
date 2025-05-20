@@ -1,52 +1,61 @@
 "use client"
-import React, { useEffect, useMemo } from "react";
+import React, { useState } from "react";
 import { useSearchParams } from "next/navigation";
+
+// Query
+import { useQuery } from "@tanstack/react-query";
+import { fetchProducts } from "@/entities/product/api/productApi";
 
 // Components
 import Container from "@/shared/ui/Container";
 import { Products } from "@/widgets/Products";
+import { BaseButton } from "@/shared/ui/Buttons/BaseButton";
+import Box from "@/shared/ui/Box";
 
-import { useDispatch, useSelector } from "react-redux";
-
-// Types
-import { RootState, AppDispatch } from "@/shared/store";
-
-// Reducers
-import { fetchProducts } from "@/entities/product/model/productThunks";
+// Icons
+import { FaArrowRightLong } from "react-icons/fa6";
 
 const Home = () => {
-  const dispatch = useDispatch<AppDispatch>()
   const params = useSearchParams()
-  const page = params.get("page") ?? "1"
-  const productsLimit = 20
+  const urlPage = Number(params.get("page") ?? "1") - 1
 
-  const { searchValue } = useSelector((state: RootState) => state.inputSearch)
-  const { products, isLoading } = useSelector(
-    (state: RootState) => state.products
-  )
+  const [page, setPage] = useState(urlPage)
 
-  useEffect(() => {
-    dispatch(fetchProducts({ 
-      limit: productsLimit, 
-      from: ((Number(page) -1) * productsLimit)
-    }))
-  }, [dispatch, page])
+  // Getting products
+  const { data, isLoading } = useQuery({
+    queryKey: ["products", page],
+    queryFn: () => fetchProducts(page)
+  })
 
-  const filteredProducts = useMemo(() => {
-    if (!searchValue) return products
+  const handleNextPage = () => {
+    setPage(prev => prev + 1)
+  }
 
-    const value = searchValue.toLowerCase().trim()
-    const filteredProducts = products.filter((product) => product.title.toLowerCase().includes(value))
-
-    return filteredProducts
-  }, [products, searchValue])
+  const handlePrevPage = () => {
+    if (page === 0) return
+    setPage(prev => prev - 1)
+  }
 
   return (
     <Container>
-      <Products 
-        filteredProducts={filteredProducts} 
-        isLoading={isLoading}
-      />
+      <Box className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
+        <Products 
+          products={data} 
+          isLoading={isLoading}
+        />
+      </Box>
+      {/* Pagination */}
+      <div className="w-full flex items-center gap-2">
+        <BaseButton
+          text="Previous"
+          onClick={handlePrevPage}
+        />
+        <BaseButton
+          text="Next"
+          onClick={handleNextPage}
+          icon={<FaArrowRightLong/>}
+        />
+      </div>
     </Container>
   )
 }

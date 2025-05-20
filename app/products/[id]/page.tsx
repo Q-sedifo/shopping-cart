@@ -2,6 +2,7 @@
 import React from "react";
 
 import { useQuery } from "@tanstack/react-query";
+import { fetchProduct } from "@/entities/product/api/productApi";
 
 // Components
 import Container from "@/shared/ui/Container";
@@ -10,11 +11,6 @@ import { ProductImages } from "./(ui)/ProductImages";
 import { ProductInfo } from "./(ui)/ProductInfo";
 import { ProductCharacteristics } from "./(ui)/ProductCharacteristics";
 import { ProductReviews } from "./(ui)/ProductReviews";
-
-const fetchProduct = async (id: number) => {
-  const res = await fetch(`https://dummyjson.com/products/${id}`)
-  return res.json()
-}
 
 interface IProductProps {
   params: Promise<{ id: string }>
@@ -25,7 +21,7 @@ const Product: React.FC<IProductProps> = ({ params }) => {
 
   // Getting product
   const { data, isLoading, isError } = useQuery({
-    queryKey: ['product', id],
+    queryKey: ["product", id],
     queryFn: () => fetchProduct(Number(id)),
     enabled: !!id, 
   })

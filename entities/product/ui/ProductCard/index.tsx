@@ -6,7 +6,7 @@ import { AddProductToCartBtn } from "@/shared/ui/Buttons/AddProductToCartBtn";
 import Link from "next/link";
 
 // Types
-import type { IProduct } from "../model/type";
+import { IProduct } from "../../model/type";
 
 interface IProductCardProps {
   product: IProduct;
