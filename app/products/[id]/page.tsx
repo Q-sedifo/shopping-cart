@@ -1,41 +1,22 @@
-"use client"
 import React from "react";
 
-import { useQuery } from "@tanstack/react-query";
 import { fetchProduct } from "@/entities/product/api/productApi";
 
 // Components
 import Container from "@/shared/ui/Container";
-import Box from "@/shared/ui/Box";
 import { ProductImages } from "./(ui)/ProductImages";
 import { ProductInfo } from "./(ui)/ProductInfo";
 import { ProductCharacteristics } from "./(ui)/ProductCharacteristics";
 import { ProductReviews } from "./(ui)/ProductReviews";
 
-interface IProductProps {
-  params: Promise<{ id: string }>
-}
+type TParams = Promise<{ id: string }>
 
-const Product: React.FC<IProductProps> = ({ params }) => {
-  const { id } = React.use(params)
-
-  // Getting product
-  const { data, isLoading, isError } = useQuery({
-    queryKey: ["product", id],
-    queryFn: () => fetchProduct(Number(id)),
-    enabled: !!id, 
-  })
-
-  console.log(data)
+const Product = async ({ params }: { params: TParams }) => {
+  const { id } = await params
+  const data = await fetchProduct(Number(id))
 
   return (
     <Container>
-      {isLoading || isError && (
-        <Box className="flex-2">
-          {isLoading && <p>Loading...</p>}
-          {isError && <p>Error!</p>}
-        </Box>
-      )}
       {data && (
         <div className="w-full flex flex-col gap-5 lg:flex-row">
           <div className="w-full flex flex-2 flex-col gap-5">
