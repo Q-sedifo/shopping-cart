@@ -17,7 +17,7 @@ interface IProductsProps {
 
 export const Products: React.FC<IProductsProps> = ({ products, isLoading }) => {
   return (
-    <>
+    <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
       {isLoading && (
         Array.from({ length: 9 }, (_, i) => (
           <ProductCardSkeleton key={i} />
@@ -26,6 +26,6 @@ export const Products: React.FC<IProductsProps> = ({ products, isLoading }) => {
       {products?.map((product: IProduct) => (
         <ProductCard key={randomId()} product={product}/>
       ))}
-    </>
+    </div>
   )
 }

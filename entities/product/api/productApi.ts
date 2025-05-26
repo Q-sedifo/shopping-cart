@@ -3,9 +3,15 @@ import axios from "axios";
 // Types
 import { IProduct } from "../model/type";
 
-// Gettings all products
+// Getting all products
 export const fetchProducts = async (page: number = 0, limit: number = 12): Promise<IProduct[]> => {
   const { data } = await axios.get(`https://dummyjson.com/products?limit=${limit}&skip=${page * limit}`)
+  return data.products as IProduct[]
+}
+
+// Getting products by category 
+export const fetchProductsByCategory = async (category: string, page: number = 0, limit: number = 12): Promise<IProduct[]> => {
+  const { data } = await axios.get(`https://dummyjson.com/products/category/${category}?limit=${limit}&skip=${page * limit}`)
   return data.products as IProduct[]
 }
 

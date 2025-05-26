@@ -4,7 +4,7 @@ import React from "react";
 
 // Components
 import Box from "@/shared/ui/Box";
-import Link from "next/link";
+import { CategoryLink } from "@/entities/category/ui/CategoryLink";
 
 // Redux
 import { useSelector } from "react-redux";
@@ -20,11 +20,7 @@ const Categories = () => {
       <Box.Title>Categories {items.length}</Box.Title>
       <Box.Content className="w-full flex flex-col">
         {items.map((category: string, index: number) => (
-          <div key={index} className="capitalize">
-            <Link href={`categories/${category}`}>
-              { category }
-            </Link>
-          </div>
+          <CategoryLink key={index} name={category} />
         ))}
       </Box.Content>
     </Box>

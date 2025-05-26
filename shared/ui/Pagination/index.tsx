@@ -17,7 +17,7 @@ export const Pagination: React.FC<IPaginationProps> = ({ page, onNextClick, onPr
   const isFirstPage = page === 0
   
   return (
-    <div className="w-full flex items-center gap-2">
+    <div className="w-full flex items-center gap-2 !mt-2">
       <BaseButton
         text="Previous"
         onClick={onPrevClick}
