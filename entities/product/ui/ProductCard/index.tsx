@@ -30,7 +30,9 @@ export const ProductCard: React.FC<IProductCardProps> = ({ product }) => {
           </span>
         </Link>
       </div>
-      <p className="text-gray-500 text-xs">{product.description}</p>
+      <p className="text-gray-500 text-xs max-h-[64px] text-ellipsis">
+        {product.description}
+      </p>
       <div className="w-full !mt-5 flex items-center justify-between">
         <span className="font-semibold">{product.price}$</span>
         <AddProductToCartBtn product={product}/>

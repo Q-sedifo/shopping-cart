@@ -1,7 +1,7 @@
+import { redirect } from 'next/navigation';
+
 const Products = () => {
-  return (
-    null
-  )
+  redirect('/')
 }
 
 export default Products;
