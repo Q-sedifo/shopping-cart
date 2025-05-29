@@ -1,4 +1,3 @@
-"use client"
 import React from "react";
 
 // Types
@@ -7,6 +6,7 @@ import { IProduct } from "@/entities/product/model/type";
 // Components
 import Box from "@/shared/ui/Box";
 import { AddProductToCartBtn } from "@/shared/ui/Buttons/AddProductToCartBtn";
+import { ProductRating } from "@/entities/product/ui/ProductRating";
 
 interface IProductInfoProps {
   product: IProduct;
@@ -27,6 +27,7 @@ export const ProductInfo: React.FC<IProductInfoProps> = ({ product }) => {
             <span className="text-red-700">Out of stock</span>
           )}
         </span>
+        <ProductRating rating={product.rating}/>
         <span>{product.price}$</span>
       </Box.Content>
     </Box>

@@ -15,6 +15,8 @@ const Product = async ({ params }: { params: TParams }) => {
   const { id } = await params
   const data = await fetchProduct(Number(id))
 
+  console.log(data)
+
   return (
     <Container>
       {data && (
