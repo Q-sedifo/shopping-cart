@@ -8,6 +8,7 @@ export interface IProduct {
   stock: number;
   thumbnail: string;
   reviews: IProductReview[];
+  category: string;
 }
 
 export interface IProductReview {

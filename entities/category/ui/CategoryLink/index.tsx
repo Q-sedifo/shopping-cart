@@ -18,7 +18,7 @@ export const CategoryLink: React.FC<ICategoryLinkProps> = ({ name }) => {
 
   return (
     <Link href={link}>
-      <div className={cn("!py-1 capitalize border-b border-transparent", {
+      <div className={cn("!py-1 capitalize border-b border-transparent hover:underline", {
         "text-emerald-500 !border-emerald-500": isActive
       })}>
         { name }
